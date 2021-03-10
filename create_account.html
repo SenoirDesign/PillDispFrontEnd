@@ -30,10 +30,10 @@
         </div>
         <div class="row justify-content-center my-2">
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-7 px-1">
-              <input type="text" class="form-control mt-2 ca-input" placeholder="First name" autofocus required>
+              <input type="text"  id="FirstName" class="form-control mt-2 ca-input" placeholder="First name" autofocus required>
           </div>
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-7 px-1">
-            <input type="text" class="form-control mt-2 ca-input" placeholder="Last name" required>
+            <input type="text"  id="LastName" class="form-control mt-2 ca-input" placeholder="Last name" required>
           </div>
         </div>
 
@@ -46,26 +46,40 @@
 
         <div class="row justify-content-center my-2">
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-7 px-1">
-              <input type="text" class="form-control ca-input" placeholder="Username" required>
+              <input type="text" id="Username" class="form-control ca-input" placeholder="Username" required>
           </div>
         </div>
         <div class="row justify-content-center my-2">
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-7 px-1">
-                <input type="password" class="form-control ca-input" placeholder="Password" required>
+                <input type="password" id="Password" class="form-control ca-input" placeholder="Password" required>
             </div>
         </div>
         <div class="row justify-content-center my-2">
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-7 px-1">
-              <input type="password" class="form-control ca-input" placeholder="Confirm password" required>
+              <input type="password" id="Password2" class="form-control ca-input" placeholder="Confirm password" required>
           </div>
       </div>
         <div class="row justify-content-center my-4">
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-7">
-              <input type="submit" class="btn btn-light form-control">
+              <input type="submit" class="btn btn-light form-control" onclick="DataStore.save()">
           </div>
       </div>
       </form>      
     </div>
+
+    <script>
+      import { DataStore } from '@aws-amplify/datastore';
+      import { Patient } from './models';
+      await DataStore.save(
+        new Patient({
+          "FirstName": document.getElementById("FirstName"),
+          "LastName":  document.getElementById("LastName"),
+          "Username":  document.getElementById("Username"),
+          "Password":  document.getElementById("Password"),
+          "PatientMedications": []
+        })
+      );
+    </script>
 
     <!-- Bootstrap JS-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
